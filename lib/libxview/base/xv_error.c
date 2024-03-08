@@ -126,7 +126,11 @@ xv_error_format(object, avlist)
 		(int) errno);
 #else
 	if ((int) errno < sys_nerr)
+#if defined(__linux__) && defined(__GLIBC__)
+            sprintf(layer_msg, "%s", strerror((int) errno));
+#else
 	    sprintf(layer_msg, "%s", sys_errlist[(int) errno]);
+#endif
 	else
 	    sprintf(layer_msg, XV_MSG("unix error %d"), 
 		(int) errno);

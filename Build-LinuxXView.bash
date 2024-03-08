@@ -88,8 +88,8 @@ while [ $# -gt 0 ]; do
       ;;
     instlibs)
       install -d $OWDEST $X11DEST
-      make install install.man
-      make SUBDIRS=doc install
+      make DESTDIR='' install install.man
+      make DESTDIR='' SUBDIRS=doc install
       ;;
     clients)
       make Clients
@@ -106,15 +106,15 @@ while [ $# -gt 0 ]; do
       ) || exit $?
       ;;
     instclients)
-      make SUBDIRS=clients install install.man install.srcs
+      make DESTDIR='' SUBDIRS=clients install install.man install.srcs
       ;;
     instcontrib)
-      make SUBDIRS=contrib install install.man install.srcs
+      make DESTDIR='' SUBDIRS=contrib install install.man install.srcs
       ;;
     instolvwm)
       (
         cd clients/olvwm-4.1
-        make install install.man
+        make DESTDIR='' install install.man
       ) || exit $?
       ;;
     instfinish)
